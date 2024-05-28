@@ -1,0 +1,66 @@
+// Sample product data
+const products = [
+    { id: 1, name: 'Product 1', price: 10.00 },
+    { id: 2, name: 'Product 2', price: 15.50 },
+    { id: 3, name: 'Product 3', price: 20.00 }
+];
+
+let cart = [];
+
+// Function to display products
+function displayProducts() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        productDiv.innerHTML = `
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price.toFixed(2)}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+        `;
+        productList.appendChild(productDiv);
+    });
+}
+
+// Function to add a product to the cart
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        cart.push(product);
+        displayCart();
+    }
+}
+
+// Function to display the cart
+function displayCart() {
+    const cartDiv = document.getElementById('cart');
+    cartDiv.innerHTML = '';
+
+    cart.forEach((item, index) => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.className = 'cart-item';
+        cartItemDiv.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>Price: $${item.price.toFixed(2)}</p>
+            <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartDiv.appendChild(cartItemDiv);
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const totalDiv = document.createElement('div');
+    totalDiv.innerHTML = <h3>Total: $${total.toFixed(2)}</h3>;
+    cartDiv.appendChild(totalDiv);
+}
+
+// Function to remove a product from the cart
+function removeFromCart(cartIndex) {
+    cart.splice(cartIndex, 1);
+    displayCart();
+}
+
+// Initial display
+displayProducts();
+displayCart();
