@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+h1, h2 {
+    color: #333;
+}
+#product-list, #cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product, .cart-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+}
+.product button, .cart-item button {
+    margin-top: 10px;
+}
